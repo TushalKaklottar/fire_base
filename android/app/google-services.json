@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "832551811838",
+    "project_id": "tushal-fb",
+    "storage_bucket": "tushal-fb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:832551811838:android:c664a14ad100d6f07003af",
+        "android_client_info": {
+          "package_name": "com.example.fire_base"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNVxPGQdavAvSSWyLYbPkoMtRSmgDKabA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
