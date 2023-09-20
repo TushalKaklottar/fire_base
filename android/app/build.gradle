@@ -34,12 +34,16 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    kotlinOptions {
-        jvmTarget = '1.8'
+//    kotlinOptions {
+//       vmTarget = '7.4.2'
+//    }
+
+    buildscript {
+        ext.kotlin_version = "1.5.21"
     }
 
     sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
+        main.java.srcDirs += 'src/main/kotl in'
     }
 
     defaultConfig {
