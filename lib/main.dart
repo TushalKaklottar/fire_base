@@ -27,12 +27,12 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(
             name: '/',
-            page: () => const AddUser(),
-        ),
-        GetPage(
-            name: '/',
             page: () => const HomePage(),
         ),
+        // GetPage(
+        //   name: '/',
+        //   page: () => const AddUser(),
+        // ),
       ],
     );
   }
