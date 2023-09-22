@@ -20,6 +20,7 @@ class FireStoreHelper {
       "id": userModal.id,
       "password": userModal.password,
     };
+    log("user: $user");
     firebaseFireStore.collection(collection).doc("${userModal.id}").set(user);
   }
 

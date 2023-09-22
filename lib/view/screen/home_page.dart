@@ -1,11 +1,15 @@
 import 'dart:developer';
 import 'package:fire_base/helper_class/firestore_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+   HomePage({super.key});
 
-  @override
+   int id =  Get.arguments;
+
+   @override
   Widget build(BuildContext context) {
 
     Size s = MediaQuery.of(context).size;
