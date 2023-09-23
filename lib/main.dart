@@ -1,4 +1,3 @@
-import 'package:fire_base/view/screen/add_user.dart';
 import 'package:fire_base/view/screen/home_page.dart';
 import 'package:fire_base/view/screen/login_page.dart';
 import 'package:firebase_core/firebase_core.dart';

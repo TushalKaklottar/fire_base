@@ -12,6 +12,7 @@ class LoginPage extends StatelessWidget {
   String? password;
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,7 +80,7 @@ class LoginPage extends StatelessWidget {
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       label: Text("password")
-                      
+
                     ),
                   ),
                   SizedBox(
