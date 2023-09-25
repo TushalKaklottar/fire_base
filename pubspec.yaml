@@ -39,6 +39,8 @@ dependencies:
   firebase_auth: any
   get: any
   cloud_firestore: any
+  google_fonts: any
+  gap: ^3.0.1
 
 dev_dependencies:
   flutter_test:
