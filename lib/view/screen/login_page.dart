@@ -27,51 +27,132 @@ class LoginPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-              Text("Log In",
-                style: GoogleFonts.akronim(
+              Text("Sing In",
+                style: GoogleFonts.andika(
                 color: Colors.white,
                   fontSize: 30
               ),
               )
             ],
             ),
-            const Gap(30),
+            const SizedBox(height: 30),
             Form(
               key: formKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      margin: const EdgeInsets.all(10),
-                      child: TextFormField(
-                        style: GoogleFonts.poppins(
+                    TextFormField(
+                      textInputAction: TextInputAction.next,
+                      initialValue: id,
+                      keyboardType: TextInputType.number,
+
+                      validator: (value) {
+                        if(value!.isEmpty) {
+                          return "enter the value";
+                        } else {
+                          return null;
+                        }
+                      },
+
+                      decoration: InputDecoration(
+                        enabled: true,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        fillColor: Colors.white60,
+                        filled: true,
+                        hintText: "ID",
+                        helperStyle: GoogleFonts.aleo(
+                            color: Colors.black45
+                        ),
+                      ),
+
+                      onSaved: (newValue) {
+                        id = newValue!;
+                      },
+                      style: GoogleFonts.poppins(
+                        fontSize: 14,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w600
+                      ),
+                    ),
+
+                    const SizedBox(height: 20),
+                    TextFormField(
+                      textInputAction: TextInputAction.next,
+                      initialValue: name,
+
+                      validator: (value) {
+                        if(value!.isEmpty) {
+                          return "enter the value";
+                        } else {
+                          return null;
+                        }
+                      },
+
+                      decoration: InputDecoration(
+                        enabled: true,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        fillColor: Colors.white60,
+                        filled: true,
+                        hintText: "Name",
+                        helperStyle: GoogleFonts.aleo(
+                            color: Colors.black45
+                        ),
+                      ),
+
+                      onSaved: (newValue) {
+                        name = newValue!;
+                      },
+                      style: GoogleFonts.poppins(
                           fontSize: 14,
                           color: Colors.black,
                           fontWeight: FontWeight.w600
-                        ),
-                        decoration: InputDecoration(
-                          enabled: true,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          fillColor: Colors.white60,
-                          filled: true,
-                          hintText: "ID",
-                          helperStyle: GoogleFonts.aleo(
-                            color: Colors.black45
-                          ),
-                        ),
-                        keyboardType: TextInputType.number,
-                        textInputAction: TextInputAction.next,
-                        validator: (value) {
-                          if(value!.isEmpty) {
-                            return "enter the value";
-                          } else {
-                            return null;
-                          }
-                        },
                       ),
                     ),
+                    const SizedBox(height: 20),
+                    TextFormField(
+                      textInputAction: TextInputAction.done,
+                      keyboardType: TextInputType.visiblePassword,
+                      initialValue: password,
+
+                      validator: (value) {
+                        if(value!.isEmpty) {
+                          return "enter the value";
+                        } else {
+                          return null;
+                        }
+                      },
+
+                      decoration: InputDecoration(
+                        enabled: true,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        fillColor: Colors.white60,
+                        filled: true,
+                        hintText: "Password",
+                        helperStyle: GoogleFonts.aleo(
+                            color: Colors.black45
+                        ),
+                      ),
+
+                      onSaved: (newValue) {
+                        password = newValue!;
+                      },
+                      style: GoogleFonts.poppins(
+                          fontSize: 14,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600
+                      ),
+                    ),
+
+                    const SizedBox(height: 40),
+
+                    
+
                   ],
                 )
             )
@@ -81,44 +162,6 @@ class LoginPage extends StatelessWidget {
             //   child: Column(
             //     children: [
             //       TextFormField(
-            //         validator: (value) {
-            //           if(value!.isEmpty) {
-            //             return "enter the value";
-            //           } else {
-            //             return null;
-            //           }
-            //         },
-            //         decoration: const InputDecoration(
-            //           border: OutlineInputBorder(),
-            //             label: Text("Id")
-            //         ),
-            //         onSaved: (newValue) {
-            //           id = newValue!;
-            //         },
-            //         initialValue: id,
-            //         textInputAction: TextInputAction.next,
-            //         keyboardType: TextInputType.number,
-            //       ),
-            //       const SizedBox(height: 20),
-            //       TextFormField(
-            //         textInputAction: TextInputAction.next,
-            //         initialValue: name,
-            //         validator: (value) {
-            //           if(value!.isEmpty) {
-            //             return "enter the value";
-            //           } else {
-            //             return null;
-            //           }
-            //         },
-            //         decoration: const InputDecoration(
-            //           border: OutlineInputBorder(),
-            //             label: Text("name")
-            //         ),
-            //         onSaved: (newValue) {
-            //           name = newValue;
-            //         },
-            //       ),
-            //       const SizedBox(height: 20),
             //       TextFormField(
             //         initialValue: password,
             //         validator: (value) {
