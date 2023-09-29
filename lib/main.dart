@@ -1,5 +1,6 @@
 import 'package:fire_base/view/screen/home_page.dart';
 import 'package:fire_base/view/screen/login_page.dart';
+import 'package:fire_base/view/screen/sign_in_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'firebase_options.dart';
@@ -33,10 +34,10 @@ class MyApp extends StatelessWidget {
             name: '/home',
             page: () =>  HomePage(),
         ),
-        // GetPage(
-        //   name: '/',
-        //   page: () => const AddUser(),
-        // ),
+        GetPage(
+          name: '/sign',
+          page: () => const Sign_In(),
+        ),
       ],
     );
   }

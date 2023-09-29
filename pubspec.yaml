@@ -41,6 +41,8 @@ dependencies:
   cloud_firestore: any
   google_fonts: any
   gap: ^3.0.1
+  shared_preferences: any
+  get_storage: any
 
 dev_dependencies:
   flutter_test:

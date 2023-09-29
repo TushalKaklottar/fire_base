@@ -1,7 +1,6 @@
+import 'package:fire_base/controller/login_controller.dart';
 import 'package:fire_base/helper_class/firestore_helper.dart';
-import 'package:fire_base/modals/create_user_modals.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -9,16 +8,17 @@ import 'package:google_fonts/google_fonts.dart';
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
 
-  String? id;
-  String? name;
-  String? password;
+  String id = "";
+  String password = "";
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    LoginFirsTimeCheck loginFirsTimeCheck = Get.put(LoginFirsTimeCheck());
+
     return Scaffold(
-      backgroundColor: Colors.white60,
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(14),
         child: Column(
@@ -27,15 +27,15 @@ class LoginPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-              Text("Sing In",
+              Text("Log In",
                 style: GoogleFonts.andika(
-                color: Colors.white,
+                color: Colors.black,
                   fontSize: 30
               ),
               )
             ],
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 25),
             Form(
               key: formKey,
                 child: Column(
@@ -59,11 +59,12 @@ class LoginPage extends StatelessWidget {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        fillColor: Colors.white60,
+                        fillColor: Colors.grey.shade200,
                         filled: true,
                         hintText: "ID",
                         helperStyle: GoogleFonts.aleo(
-                            color: Colors.black45
+                            color: Colors.white60,
+                          fontSize: 12
                         ),
                       ),
 
@@ -71,48 +72,12 @@ class LoginPage extends StatelessWidget {
                         id = newValue!;
                       },
                       style: GoogleFonts.poppins(
-                        fontSize: 14,
+                        fontSize: 12,
                         color: Colors.black,
                         fontWeight: FontWeight.w600
                       ),
                     ),
-
-                    const SizedBox(height: 20),
-                    TextFormField(
-                      textInputAction: TextInputAction.next,
-                      initialValue: name,
-
-                      validator: (value) {
-                        if(value!.isEmpty) {
-                          return "enter the value";
-                        } else {
-                          return null;
-                        }
-                      },
-
-                      decoration: InputDecoration(
-                        enabled: true,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        fillColor: Colors.white60,
-                        filled: true,
-                        hintText: "Name",
-                        helperStyle: GoogleFonts.aleo(
-                            color: Colors.black45
-                        ),
-                      ),
-
-                      onSaved: (newValue) {
-                        name = newValue!;
-                      },
-                      style: GoogleFonts.poppins(
-                          fontSize: 14,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w600
-                      ),
-                    ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 18),
                     TextFormField(
                       textInputAction: TextInputAction.done,
                       keyboardType: TextInputType.visiblePassword,
@@ -131,11 +96,12 @@ class LoginPage extends StatelessWidget {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        fillColor: Colors.white60,
+                        fillColor: Colors.grey.shade200,
                         filled: true,
                         hintText: "Password",
                         helperStyle: GoogleFonts.aleo(
-                            color: Colors.black45
+                            color: Colors.white60,
+                          fontSize: 12
                         ),
                       ),
 
@@ -143,60 +109,84 @@ class LoginPage extends StatelessWidget {
                         password = newValue!;
                       },
                       style: GoogleFonts.poppins(
-                          fontSize: 14,
+                          fontSize: 12,
                           color: Colors.black,
                           fontWeight: FontWeight.w600
                       ),
                     ),
 
-                    const SizedBox(height: 40),
 
-                    
+                    const SizedBox(height: 30),
 
+                    SizedBox(
+                      width: 180,
+                      height: 40,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.blue,
+                        ),
+                          onPressed: () {
+                            if(
+                            formKey.currentState!.validate()) {
+                              formKey.currentState!.save();
+
+                              FireStoreHelper.fireStoreHelper.validateUser(
+                                  id: int.parse(id),
+                                  password: password,
+                              );
+                              loginFirsTimeCheck.setOne();
+                              FireStoreHelper.fireStoreHelper.getCredential(id: int.parse(id),);
+                              Get.offNamed('/home',arguments: int.parse(id));
+                            }
+                          },
+                          child: Text("Log In",
+                          style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12,
+                            color: Colors.white
+                          ),
+                          ),
+                      ),
+                    ),
+                    SizedBox(height: 15,),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Container(
+                            height: 2,
+                          width: 130,
+                            color: Colors.black38,
+                          ),
+                          SizedBox(width: 10,),
+                          Text("OR",
+                          style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.w600
+                          ),
+                          ),
+                          SizedBox(width: 10,),
+                          Container(
+                            height: 2,
+                            width: 140,
+                            color: Colors.black38,
+                          ),
+                        ],
+                      ),
+                    ),
+                    TextButton(
+                        onPressed: () {
+                          Get.offNamed("/sign");
+                        },
+                        child: Text("Create new user",
+                          style: GoogleFonts.poppins(
+                            color:  Colors.blue,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )
+                    )
                   ],
                 )
             )
-            // Form(
-            //   key: formKey,
-            //   autovalidateMode: AutovalidateMode.onUserInteraction,
-            //   child: Column(
-            //     children: [
-            //       TextFormField(
-            //       TextFormField(
-            //         initialValue: password,
-            //         validator: (value) {
-            //           if(value!.isEmpty) {
-            //             return "enter the value";
-            //           } else {
-            //             return null;
-            //           }
-            //         },
-            //         onSaved: (newValue) {
-            //           password = newValue;
-            //         },
-            //         decoration: const InputDecoration(
-            //           border: OutlineInputBorder(),
-            //           label: Text("password")
-            //
-            //         ),
-            //       ),
-            //       SizedBox(
-            //         height: 20,
-            //       ),
-            //       ElevatedButton(
-            //           onPressed: () {
-            //             if(formKey.currentState!.validate()) {
-            //               formKey.currentState!.save();
-            //               UserModal user = UserModal(int.parse(id!), name!, password!);
-            //               FireStoreHelper.fireStoreHelper.creteUser(userModal: user);
-            //               Get.offNamed('/home',arguments: int.parse(id!));
-            //             }
-            //           },
-            //           child: const Text("Submit"),
-            //       )
-            //     ],
-            //   ),
-            // ),
           ],
         ),
       ),

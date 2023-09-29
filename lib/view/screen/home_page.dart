@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
         title: const Text("Home"),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: FutureBuilder(
           future: FireStoreHelper.fireStoreHelper.getAllUser(),
           builder: (context, snapshot) {
@@ -27,7 +27,6 @@ class HomePage extends StatelessWidget {
               return ListView.builder(
                 itemCount: snapshot.data?.length,
                   itemBuilder: (context,index) {
-
                   }
               );
             } else if (snapshot.hasError) {
