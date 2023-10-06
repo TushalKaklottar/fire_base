@@ -1,21 +1,23 @@
-import 'package:fire_base/controller/login_controller.dart';
 import 'package:fire_base/helper_class/firestore_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../modals/create_user_modals.dart';
+
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
 
-  String id = "";
-  String password = "";
+  String? id;
+  // String? name;
+  String? password;
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    LoginFirsTimeCheck loginFirsTimeCheck = Get.put(LoginFirsTimeCheck());
+    // LoginFirsTimeCheck loginFirsTimeCheck = Get.put(LoginFirsTimeCheck());
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -38,6 +40,7 @@ class LoginPage extends StatelessWidget {
             const SizedBox(height: 25),
             Form(
               key: formKey,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -48,10 +51,13 @@ class LoginPage extends StatelessWidget {
 
                       validator: (value) {
                         if(value!.isEmpty) {
-                          return "enter the value";
+                          return "Enter the User-Id";
                         } else {
                           return null;
                         }
+                      },
+                      onSaved: (newValue) {
+                        id = newValue!;
                       },
 
                       decoration: InputDecoration(
@@ -68,9 +74,7 @@ class LoginPage extends StatelessWidget {
                         ),
                       ),
 
-                      onSaved: (newValue) {
-                        id = newValue!;
-                      },
+
                       style: GoogleFonts.poppins(
                         fontSize: 12,
                         color: Colors.black,
@@ -123,21 +127,18 @@ class LoginPage extends StatelessWidget {
                       height: 40,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.blue,
+                          backgroundColor: Colors.blue,
                         ),
-                          onPressed: () {
-                            if(
-                            formKey.currentState!.validate()) {
-                              formKey.currentState!.save();
 
-                              FireStoreHelper.fireStoreHelper.validateUser(
-                                  id: int.parse(id),
-                                  password: password,
-                              );
-                              loginFirsTimeCheck.setOne();
-                              FireStoreHelper.fireStoreHelper.getCredential(id: int.parse(id),);
-                              Get.offNamed('/home',arguments: int.parse(id));
-                            }
+                          onPressed: () {
+                          if (
+                          formKey.currentState!.validate()) {
+                            formKey.currentState!.save();
+                            UserModal user = UserModal(int.parse(id!), password!);
+                                          FireBaseHelper.fireBaseHelper.creteUser(userModal: user);
+                                          Get.offNamed('/home',arguments: int.parse(id!));
+
+                          }
                           },
                           child: Text("Log In",
                           style: GoogleFonts.poppins(
@@ -148,27 +149,34 @@ class LoginPage extends StatelessWidget {
                           ),
                       ),
                     ),
-                    SizedBox(height: 15,),
+                    const SizedBox(height: 15,),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         children: [
-                          Container(
-                            height: 2,
-                          width: 130,
-                            color: Colors.black38,
+                          const Expanded(
+                            child: Divider(
+                              height: 2,
+                              thickness: 2,
+                              color: Colors.black38,
+                            ),
                           ),
-                          SizedBox(width: 10,),
-                          Text("OR",
-                          style: GoogleFonts.poppins(
-                            fontWeight: FontWeight.w600
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Text(
+                              "OR",
+                              style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16,
+                              ),
+                            ),
                           ),
-                          ),
-                          SizedBox(width: 10,),
-                          Container(
-                            height: 2,
-                            width: 140,
-                            color: Colors.black38,
+                          const Expanded(
+                            child: Divider(
+                              height: 2,
+                              thickness: 2,
+                              color: Colors.black38,
+                            ),
                           ),
                         ],
                       ),

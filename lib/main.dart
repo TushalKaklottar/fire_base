@@ -1,10 +1,4 @@
-import 'package:fire_base/view/screen/home_page.dart';
-import 'package:fire_base/view/screen/login_page.dart';
-import 'package:fire_base/view/screen/sign_in_page.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
-import 'firebase_options.dart';
-import 'package:get/get.dart';
+import 'package:fire_base/export_app.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,22 +14,26 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    LoginFirsTimeCheck loginFirsTimeCheck = Get.put(LoginFirsTimeCheck());
+
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
       ),
+      darkTheme: ThemeData.light(),
+      themeMode: ThemeMode.system,
       getPages: [
         GetPage(
-          name: '/',
-          page: () => LoginPage(),
+          name: "/",
+          page: () => loginFirsTimeCheck.isOne ? HomePage() : LoginPage(),
         ),
         GetPage(
-            name: '/home',
+            name: "/home",
             page: () =>  HomePage(),
         ),
         GetPage(
-          name: '/sign',
+          name: "/sign",
           page: () => const Sign_In(),
         ),
       ],
