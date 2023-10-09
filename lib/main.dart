@@ -14,19 +14,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    LoginFirsTimeCheck loginFirsTimeCheck = Get.put(LoginFirsTimeCheck());
+    LoginFirstTimeCheck loginFirstTimeCheck = Get.put(LoginFirstTimeCheck());
 
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
       ),
-      darkTheme: ThemeData.light(),
-      themeMode: ThemeMode.system,
       getPages: [
         GetPage(
           name: "/",
-          page: () => loginFirsTimeCheck.isOne ? HomePage() : LoginPage(),
+          page: () => loginFirstTimeCheck.isOne ? HomePage() : LoginPage(),
         ),
         GetPage(
             name: "/home",
@@ -34,7 +32,7 @@ class MyApp extends StatelessWidget {
         ),
         GetPage(
           name: "/sign",
-          page: () => const Sign_In(),
+          page: () =>  Sign_In(),
         ),
       ],
     );

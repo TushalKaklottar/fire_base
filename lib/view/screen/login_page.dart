@@ -1,23 +1,17 @@
-import 'package:fire_base/helper_class/firestore_helper.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-
-import '../../modals/create_user_modals.dart';
-
+import 'dart:developer';
+import 'package:fire_base/export_app.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
 
-  String? id;
-  // String? name;
-  String? password;
+  String id = "";
+  String password = "";
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    // LoginFirsTimeCheck loginFirsTimeCheck = Get.put(LoginFirsTimeCheck());
+    LoginFirstTimeCheck loginFirsTimeCheck = Get.put(LoginFirstTimeCheck());
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -129,16 +123,46 @@ class LoginPage extends StatelessWidget {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blue,
                         ),
-
-                          onPressed: () {
-                          if (
-                          formKey.currentState!.validate()) {
+                          onPressed: () async {
+                          if(formKey.currentState!.validate()) {
                             formKey.currentState!.save();
-                            UserModal user = UserModal(int.parse(id!), password!);
-                                          FireBaseHelper.fireBaseHelper.creteUser(userModal: user);
-                                          Get.offNamed('/home',arguments: int.parse(id!));
+                            FireBaseHelper.fireBaseHelper.validateUser(
+                              id: int.parse(id),
+                              password: password,
+                            );
 
+                            loginFirsTimeCheck.setOne();
+                            FireBaseHelper.fireBaseHelper.getCredential(
+                                id: int.parse(id),
+                            );
+
+                            Map<String, dynamic>? data =
+                            await FireBaseHelper.fireBaseHelper.getAllUser(
+                                id: int.parse(id)
+                            );
+                            String checkPassword = data?['password'];
+                            int checkID = data?['id'];
+                            log(checkPassword);
+                            if(password == checkPassword && int.parse(id) == checkID) {
+                              Get.offNamed(
+                                "/home",
+                                arguments: int.parse(id),
+                              );
+                            } else {
+                              Get.snackbar(
+                                "Password or Id",
+                                "Id or Password Wrong!!",
+                              );
+                            }
                           }
+                          // // if (
+                          // // formKey.currentState!.validate()) {
+                          // //   formKey.currentState!.save();
+                          // //   UserModal user = UserModal(int.parse(id!), password!);
+                          // //                 FireBaseHelper.fireBaseHelper.creteUser(userModal: user);
+                          // //                 Get.offNamed('/home',arguments: int.parse(id!));
+                          // //
+                          // // }
                           },
                           child: Text("Log In",
                           style: GoogleFonts.poppins(
@@ -193,8 +217,8 @@ class LoginPage extends StatelessWidget {
                         )
                     )
                   ],
-                )
-            )
+                ),
+            ),
           ],
         ),
       ),

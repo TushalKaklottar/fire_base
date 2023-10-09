@@ -1,7 +1,6 @@
-import 'package:get_storage/get_storage.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:fire_base/export_app.dart';
 
-class LoginFirsTimeCheck {
+class LoginFirstTimeCheck {
 
   final String _isFirst = "isFirst";
 
