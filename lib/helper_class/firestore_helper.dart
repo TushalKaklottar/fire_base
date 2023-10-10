@@ -15,7 +15,7 @@ class FireBaseHelper {
      "id": fireStoreModal.id,
      "password": fireStoreModal.password,
      "contact": [
-       000,
+       00,
      ],
       "received": {
        "000": {
