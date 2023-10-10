@@ -14,9 +14,11 @@ export 'package:get_storage/get_storage.dart';
 export 'package:fire_base/view/screen/home_page.dart';
 export 'package:fire_base/view/screen/login_page.dart';
 export 'package:fire_base/view/screen/sign_in_page.dart';
+export 'package:fire_base/view/screen/splash_screen.dart';
 
 // controller
 export 'controller/login_controller.dart';
+export '../../controller/splash_controller.dart';
 
 // helper
 export 'package:fire_base/helper_class/firestore_helper.dart';

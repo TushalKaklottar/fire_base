@@ -9,70 +9,48 @@ class FireBaseHelper {
   String collection = "user";
 
 
-  adduser({required FireStoreModal fireStoreModal}) {
-    Map<String,dynamic> data = {
-     "name": fireStoreModal.name,
-     "id": fireStoreModal.id,
-     "password": fireStoreModal.password,
-     "contact": [
-       000,
-     ],
-      "received": {
-       "000": {
-         "msg": ["Hello"],
-         "time": ["9/10/2023-9:33:23"],
-       }
-      },
-      "sent": {
-       "000": {
-         "msg": [""],
-         "time": [""],
-       }
-      }
-    };
-  }
 
-
-  creteUser({required UserModal userModal})  {
-    Map<String,dynamic> user = {
-      "id": userModal.id,
-      "password": userModal.password,
-    };
-    log("user: $user");
-    firebasestore.collection(collection).doc("${userModal.id}").set(user);
-  }
-
-  // validate user
   validateUser({required int id, required String password}) async {
-    DocumentSnapshot doc =
-    await firebasestore.collection(collection).doc(id.toString()).get();
+    DocumentSnapshot doc = await firebasestore.collection(collection).doc(id.toString()).get();
 
-    if (doc["id"] == id) {
-      log("ID Is fund");
+    if(doc["id"] == id) {
+      log("Id Is fund");
       if(doc["password"] == password) {
         log("Password Check");
       }
     } else {
-      log("Id Not Exist");
+      Get.snackbar("Failed", "User Can't Axis..");
+      log("Id not exists");
     }
     return doc.data();
   }
 
-//   // get credential
-//
-getCredential({required int id}) async {
+
+  getCredential({required int id}) async {
     DocumentSnapshot snapshot = await firebasestore.collection(collection).doc(id.toString()).get();
 
     Map<dynamic,dynamic> data = snapshot.data() as Map;
     return data["password"];
-}
+  }
 
 
   Future<Map<String, dynamic>?> getAllUser({required int id}) async {
-    DocumentSnapshot<Map<String, dynamic>> data =
-    await firebasestore.collection(collection).doc("$id").get();
+    DocumentSnapshot<Map< String, dynamic >> data =
+        await firebasestore.collection(collection).doc("$id").get();
 
-    Map<String, dynamic>? allData = data.data();
+    Map<String,dynamic>? allData = data.data();
+
     return allData;
+  }
+
+
+  addUser({required FireStoreModal fireStoreModal}) {
+    Map<String,dynamic> data = {
+      "name": fireStoreModal.name,
+      "id": fireStoreModal.id,
+      "password": fireStoreModal.password,
+
+    };
+    firebasestore.collection(collection).doc("${fireStoreModal.id}").set(data);
   }
 }

@@ -1,5 +1,6 @@
 import 'package:fire_base/export_app.dart';
 
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -24,11 +25,15 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(
           name: "/",
-          page: () => loginFirstTimeCheck.isOne ? HomePage() : LoginPage(),
+          page: () => loginFirstTimeCheck.isOne ? LoginPage() :  const Splash(),
         ),
         GetPage(
             name: "/home",
             page: () =>  HomePage(),
+        ),
+        GetPage(
+            name: '/login',
+            page: () => LoginPage(),
         ),
         GetPage(
           name: "/sign",

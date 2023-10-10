@@ -42,7 +42,6 @@ class LoginPage extends StatelessWidget {
                       textInputAction: TextInputAction.next,
                       initialValue: id,
                       keyboardType: TextInputType.number,
-
                       validator: (value) {
                         if(value!.isEmpty) {
                           return "Enter the User-Id";
@@ -124,37 +123,47 @@ class LoginPage extends StatelessWidget {
                           backgroundColor: Colors.blue,
                         ),
                           onPressed: () async {
-                          if(formKey.currentState!.validate()) {
-                            formKey.currentState!.save();
-                            FireBaseHelper.fireBaseHelper.validateUser(
-                              id: int.parse(id),
-                              password: password,
-                            );
+                            if (formKey.currentState!.validate()) {
+                              formKey.currentState!.save();
 
-                            loginFirsTimeCheck.setOne();
-                            FireBaseHelper.fireBaseHelper.getCredential(
+                              FireBaseHelper.fireBaseHelper.validateUser(
+                                  id: int.parse(id),
+                                  password: password,
+                              );
+
+                              loginFirsTimeCheck.setOne();
+
+                              FireBaseHelper.fireBaseHelper.getCredential(
                                 id: int.parse(id),
-                            );
+                              );
 
-                            Map<String, dynamic>? data =
-                            await FireBaseHelper.fireBaseHelper.getAllUser(
-                                id: int.parse(id)
-                            );
-                            String checkPassword = data?['password'];
-                            int checkID = data?['id'];
-                            log(checkPassword);
-                            if(password == checkPassword && int.parse(id) == checkID) {
-                              Get.offNamed(
-                                "/home",
-                                arguments: int.parse(id),
+                              Map<String, dynamic>? data =
+                              await FireBaseHelper.fireBaseHelper.getAllUser(
+                                  id: int.parse(id)
                               );
+
+                              String checkPassword = data?['password'];
+                              int checkID = data?['id'];
+                              log(checkPassword);
+
+                              if (password == checkPassword &&
+                                  int.parse(id) == checkID) {
+                                Get.offNamed(
+                                  "/home",
+                                  arguments: int.parse(id),
+                                );
+                              } else {
+                                Get.snackbar(
+                                  "Password or Id",
+                                  "Id or Password Wrong!!",
+                                );
+                              }
                             } else {
-                              Get.snackbar(
-                                "Password or Id",
-                                "Id or Password Wrong!!",
-                              );
+                              Get.snackbar("Failed", "User Can't Axis..");
                             }
-                          }
+                          },
+
+
                           // // if (
                           // // formKey.currentState!.validate()) {
                           // //   formKey.currentState!.save();
@@ -163,7 +172,7 @@ class LoginPage extends StatelessWidget {
                           // //                 Get.offNamed('/home',arguments: int.parse(id!));
                           // //
                           // // }
-                          },
+
                           child: Text("Log In",
                           style: GoogleFonts.poppins(
                             fontWeight: FontWeight.bold,

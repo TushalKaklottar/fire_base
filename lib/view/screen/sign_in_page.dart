@@ -12,6 +12,14 @@ class Sign_In extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Get.toNamed('/login');
+          },
+          icon: const Icon(Icons.arrow_back_ios),
+        ),
+      ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
@@ -30,6 +38,8 @@ class Sign_In extends StatelessWidget {
                 ),
                 ),
                 const SizedBox(height: 20),
+
+                // id
                 TextField(
                   onSubmitted: (value) {
                     id = int.parse(value);
@@ -49,6 +59,9 @@ class Sign_In extends StatelessWidget {
                       ),
                   ),
                 const SizedBox(height: 25),
+
+
+                // name
                 TextField(
                   onSubmitted: (value) {
                     name = value;
@@ -94,13 +107,15 @@ class Sign_In extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       FireStoreModal fireStoreModal = FireStoreModal(
-                        id,
-                        name,
-                        password,
+                          id,
+                          name,
+                          password
                       );
-                      FireBaseHelper.fireBaseHelper.adduser(fireStoreModal: fireStoreModal);
+                      FireBaseHelper.fireBaseHelper.addUser(
+                          fireStoreModal: fireStoreModal
+                      );
                       Get.offNamed("/home",arguments: id);
                     },
                     child: Text("Log In",
