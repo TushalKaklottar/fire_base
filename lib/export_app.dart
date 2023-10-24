@@ -20,12 +20,16 @@ export 'package:fire_base/view/screen/splash_screen.dart';
 export 'controller/login_controller.dart';
 export '../../controller/splash_controller.dart';
 
+//utils
+export 'utils/color.dart';
+
 // helper
 export 'package:fire_base/helper_class/firestore_helper.dart';
 
 // models
 export  '../modals/create_user_modals.dart';
 export  '../modals/get_user_modals.dart';
+export 'package:fire_base/modals/fire_store_modal.dart';
 
 // firebase
 export 'firebase_options.dart';

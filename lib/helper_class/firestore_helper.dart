@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'package:fire_base/export_app.dart';
-import 'package:fire_base/modals/fire_store_modal.dart';
 
 class FireBaseHelper {
   FireBaseHelper._();

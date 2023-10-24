@@ -1,6 +1,5 @@
 import 'package:fire_base/export_app.dart';
 
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 

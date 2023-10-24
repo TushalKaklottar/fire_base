@@ -12,9 +12,8 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     LoginFirstTimeCheck loginFirsTimeCheck = Get.put(LoginFirstTimeCheck());
-
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColor.white,
       body: Padding(
         padding: const EdgeInsets.all(14),
         child: Column(
@@ -25,7 +24,7 @@ class LoginPage extends StatelessWidget {
               children: [
               Text("Log In",
                 style: GoogleFonts.andika(
-                color: Colors.black,
+                color: AppColor.black,
                   fontSize: 30
               ),
               )
@@ -93,11 +92,11 @@ class LoginPage extends StatelessWidget {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        fillColor: Colors.grey.shade200,
+                        fillColor: AppColor.grey200,
                         filled: true,
                         hintText: "Password",
                         helperStyle: GoogleFonts.aleo(
-                            color: Colors.white60,
+                            color: AppColor.white60,
                           fontSize: 12
                         ),
                       ),
@@ -120,7 +119,7 @@ class LoginPage extends StatelessWidget {
                       height: 40,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue,
+                          backgroundColor: AppColor.blue,
                         ),
                           onPressed: () async {
                             if (formKey.currentState!.validate()) {
@@ -177,7 +176,7 @@ class LoginPage extends StatelessWidget {
                           style: GoogleFonts.poppins(
                             fontWeight: FontWeight.bold,
                             fontSize: 12,
-                            color: Colors.white
+                            color: AppColor.white,
                           ),
                           ),
                       ),
