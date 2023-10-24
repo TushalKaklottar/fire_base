@@ -57,11 +57,11 @@ class LoginPage extends StatelessWidget {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        fillColor: Colors.grey.shade200,
+                        fillColor: AppColor.grey200,
                         filled: true,
                         hintText: "ID",
                         helperStyle: GoogleFonts.aleo(
-                            color: Colors.white60,
+                            color: AppColor.white60,
                           fontSize: 12
                         ),
                       ),
@@ -69,7 +69,7 @@ class LoginPage extends StatelessWidget {
 
                       style: GoogleFonts.poppins(
                         fontSize: 12,
-                        color: Colors.black,
+                        color: AppColor.black,
                         fontWeight: FontWeight.w600
                       ),
                     ),
@@ -106,14 +106,11 @@ class LoginPage extends StatelessWidget {
                       },
                       style: GoogleFonts.poppins(
                           fontSize: 12,
-                          color: Colors.black,
+                          color: AppColor.black,
                           fontWeight: FontWeight.w600
                       ),
                     ),
-
-
                     const SizedBox(height: 30),
-
                     SizedBox(
                       width: 180,
                       height: 40,
@@ -190,7 +187,7 @@ class LoginPage extends StatelessWidget {
                             child: Divider(
                               height: 2,
                               thickness: 2,
-                              color: Colors.black38,
+                              color: AppColor.black3,
                             ),
                           ),
                           Padding(
@@ -207,7 +204,7 @@ class LoginPage extends StatelessWidget {
                             child: Divider(
                               height: 2,
                               thickness: 2,
-                              color: Colors.black38,
+                              color: AppColor.black3,
                             ),
                           ),
                         ],
@@ -219,7 +216,7 @@ class LoginPage extends StatelessWidget {
                         },
                         child: Text("Create new user",
                           style: GoogleFonts.poppins(
-                            color:  Colors.blue,
+                            color: AppColor.blue,
                             fontWeight: FontWeight.bold,
                           ),
                         )

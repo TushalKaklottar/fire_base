@@ -65,18 +65,18 @@ class Sign_In extends StatelessWidget {
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          fillColor: Colors.grey.shade200,
+                          fillColor: AppColor.grey200,
                           filled: true,
                           hintText: "ID",
                           helperStyle: GoogleFonts.aleo(
-                              color: Colors.white60,
+                              color: AppColor.white60,
                               fontSize: 12
                           ),
                         ),
 
                         style: GoogleFonts.poppins(
                             fontSize: 12,
-                            color: Colors.black,
+                            color: AppColor.black,
                             fontWeight: FontWeight.w600
                         ),
                       ),
@@ -105,7 +105,7 @@ class Sign_In extends StatelessWidget {
                           filled: true,
                           hintText: "User-Name",
                           helperStyle: GoogleFonts.aleo(
-                              color: Colors.white60,
+                              color: AppColor.white60,
                               fontSize: 12
                           ),
                         ),
@@ -134,17 +134,17 @@ class Sign_In extends StatelessWidget {
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          fillColor: Colors.grey.shade200,
+                          fillColor: AppColor.grey200,
                           filled: true,
                           hintText: "Password",
                           helperStyle: GoogleFonts.aleo(
-                              color: Colors.white60,
+                              color: AppColor.white60,
                               fontSize: 12
                           ),
                         ),
                         style: GoogleFonts.poppins(
                             fontSize: 12,
-                            color: Colors.black,
+                            color: AppColor.black,
                             fontWeight: FontWeight.w600
                         ),
                       ),
@@ -154,7 +154,7 @@ class Sign_In extends StatelessWidget {
                         height: 40,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blue,
+                            backgroundColor: AppColor.blue,
                           ),
                             onPressed: () {
                             if (formKey.currentState!.validate()) {
@@ -176,7 +176,7 @@ class Sign_In extends StatelessWidget {
                               style: GoogleFonts.poppins(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 12,
-                                  color: Colors.white,
+                                  color: AppColor.white,
                               ),
                             ),
                         ),
