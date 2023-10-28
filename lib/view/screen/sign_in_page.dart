@@ -111,7 +111,7 @@ class Sign_In extends StatelessWidget {
                         ),
                         style: GoogleFonts.poppins(
                             fontSize: 12,
-                            color: Colors.black,
+                            color: AppColor.black,
                             fontWeight: FontWeight.w600
                         ),
                       ),

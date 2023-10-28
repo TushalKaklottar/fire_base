@@ -34,4 +34,7 @@ export 'package:fire_base/modals/fire_store_modal.dart';
 // firebase
 export 'firebase_options.dart';
 
+// component
+export '../../component/background_clipper.dart';
+
 
