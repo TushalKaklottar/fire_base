@@ -20,7 +20,7 @@ class LoginPage extends StatelessWidget {
             clipper: BackgroundClipper(),
             child: Container(
               color: AppColor.blue,
-              height: 150,
+              height: 130,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -31,7 +31,7 @@ class LoginPage extends StatelessWidget {
                         "Log In",
                         style: GoogleFonts.andika(
                           color: AppColor.white,
-                          fontSize: 28,
+                          fontSize: 26,
                         ),
                       ),
                     ],

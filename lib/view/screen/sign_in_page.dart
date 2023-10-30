@@ -6,41 +6,56 @@ class Sign_In extends StatelessWidget {
   late int id;
   late String name;
   late String password;
-  List contacts = [];
+
 
    GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Get.toNamed('/login');
-          },
-          icon: const Icon(Icons.arrow_back_ios),
-        ),
-      ),
-      body: Padding(
-          padding: const EdgeInsets.all(14),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+        body: Stack(
+        children: [
+          ClipPath(
+            clipper: BackgroundClipper(),
+            child: Container(
+              color: AppColor.blue,
+              height: 130,
+              child: Row(
                 children: [
-                  Text("Sing In",
-                    style: GoogleFonts.andika(
-                        color: AppColor.black,
-                        fontSize: 30
+                IconButton(
+                    onPressed: () {
+                      Get.toNamed('/login');
+                    },
+                    icon:  Icon(
+                        Icons.arrow_back_ios,
+                        color: AppColor.white,
+                      size: 22,
                     ),
-                  )
+                  ),
+                  const SizedBox(width: 80),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Sign In",
+                        style: GoogleFonts.andika(
+                          color: AppColor.white,
+                          fontSize: 26,
+                        ),
+                      )
+                    ],
+                  ),
                 ],
               ),
-              const SizedBox(height: 25),
-              Form(
-                key: formKey,
+            ),
+          ),
+          Padding( padding: const EdgeInsets.all(14),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 25),
+                Form(
+                  key: formKey,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -57,8 +72,8 @@ class Sign_In extends StatelessWidget {
                           }
                         },
                         onSaved: (value) {
-                        id = int.parse(value!);
-                      },
+                          id = int.parse(value!);
+                        },
 
                         decoration: InputDecoration(
                           enabled: true,
@@ -156,14 +171,14 @@ class Sign_In extends StatelessWidget {
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColor.blue,
                           ),
-                            onPressed: () {
+                          onPressed: () {
                             if (formKey.currentState!.validate()) {
                               formKey.currentState!.save();
 
                               FireStoreModal firebaseModal = FireStoreModal(
-                                  id,
-                                  name,
-                                  password,
+                                id,
+                                name,
+                                password,
                               );
                               FireBaseHelper.fireBaseHelper.addUser(fireStoreModal: firebaseModal);
 
@@ -171,22 +186,24 @@ class Sign_In extends StatelessWidget {
                               Get.snackbar("Failed", "User Can't Axis..");
                             }
                             Get.offNamed("/home",arguments: id);
-                            },
-                            child: Text("Sing In",
-                              style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 12,
-                                  color: AppColor.white,
-                              ),
+                          },
+                          child: Text("Sing In",
+                            style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12,
+                              color: AppColor.white,
                             ),
+                          ),
                         ),
                       ),
                     ],
                   ),
-              ),
-            ],
+                ),
+              ],
+            ),
           ),
-        ),
+        ],
+        // child:
       ),
     );
   }
