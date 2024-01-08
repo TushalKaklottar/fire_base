@@ -49,7 +49,8 @@ class Sign_In extends StatelessWidget {
               ),
             ),
           ),
-          Padding( padding: const EdgeInsets.all(14),
+          Padding(
+            padding: const EdgeInsets.all(14),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -203,7 +204,6 @@ class Sign_In extends StatelessWidget {
             ),
           ),
         ],
-        // child:
       ),
     );
   }

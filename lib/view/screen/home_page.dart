@@ -16,17 +16,33 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Home"),
+        automaticallyImplyLeading: false,
+        title: Text(
+          "User",
+        style: GoogleFonts.poppins(
+          textStyle: TextStyle(
+            color: AppColor.black,
+            fontSize: 26,
+            fontWeight: FontWeight.bold,
+          )
+        ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+      child: FutureBuilder(
+        future: FireBaseHelper.fireBaseHelper.getAllUser(id: argId),
+          builder: (context,snapshot) {
+            if(snapshot.hasData) {
+              return ListView.builder(
+                  itemBuilder: (context,index) {
 
-        ],
-      ),
+                  }
+              );
+            }
+          }
+      )
       ),
     );
-  }
+   }
 }
