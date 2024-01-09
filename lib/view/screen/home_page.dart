@@ -1,7 +1,8 @@
 import 'package:fire_base/export_app.dart';
+import 'package:fire_base/view/screen/chat_page.dart';
 
 class HomePage extends StatefulWidget {
-   HomePage({super.key});
+   const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -35,10 +36,70 @@ class _HomePageState extends State<HomePage> {
           builder: (context,snapshot) {
             if(snapshot.hasData) {
               return ListView.builder(
+                itemCount: snapshot.data?['contacts']?.length,
                   itemBuilder: (context,index) {
 
-                  }
+                    Map<String,dynamic>? allUser = snapshot.data;
+                    Map data = {
+                      'sender': allUser?['contacts'][index],
+                      'received': allUser,
+                    };
+
+                    if(snapshot.data?['contacts'].length > 0) {
+                      return Container(
+                        margin: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: AppColor.white,
+                          boxShadow: const [
+                            BoxShadow(
+                              offset: Offset(1.6, 1.1),
+                              color: Colors.black26,
+                            ),
+                          ],
+                        ),
+                        child: ListTile(
+                          onTap: () {
+                            Get.toNamed(
+                                "/ChatPage",
+                              arguments: data,
+                            );
+                          },
+                          title: StreamBuilder(
+                            stream: FireBaseHelper.fireBaseHelper.userStream(
+                                receivedId: data['sender'],
+                            ),
+                            builder: (context,snapshot) {
+                              if(snapshot.hasData) {
+                                var name = snapshot.data;
+                                return  Text(
+                                    "${name['name']}",
+                                  style: TextStyle(
+                                    color: AppColor.black,
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                );
+                              } else {
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              }
+                            }
+                          ),
+                          subtitle: Text(
+                              ""
+                          ),
+                          trailing: IconButton(onPressed: onPressed, icon: icon),
+                        ),
+                      );
+                    }
+                    return null;
+                  },
               );
+            } else if (snapshot.hasError) {
+
+            } else {
+              return Center(child: CircularProgressIndicator(),);
             }
           }
       )

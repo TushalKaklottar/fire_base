@@ -1,4 +1,5 @@
 import 'package:fire_base/export_app.dart';
+import 'package:fire_base/view/screen/chat_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,6 +38,10 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: "/sign",
           page: () =>  Sign_In(),
+        ),
+        GetPage(
+            name: "/ChatPage",
+            page: () => const ChatPage(),
         ),
       ],
     );
