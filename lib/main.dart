@@ -7,16 +7,16 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+   MyApp({super.key});
+
+  LoginFirstTimeCheck loginFirstTimeCheck = Get.put(LoginFirstTimeCheck());
 
   @override
   Widget build(BuildContext context) {
-    LoginFirstTimeCheck loginFirstTimeCheck = Get.put(LoginFirstTimeCheck());
-
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

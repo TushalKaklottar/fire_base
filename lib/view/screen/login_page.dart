@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:fire_base/controller/profile_controller.dart';
 import 'package:fire_base/export_app.dart';
 
 class LoginPage extends StatelessWidget {
@@ -8,10 +9,12 @@ class LoginPage extends StatelessWidget {
    String password = "";
 
    GlobalKey<FormState> formKey = GlobalKey<FormState>();
+   ProfileController  profileController = Get.find();
+
 
   @override
   Widget build(BuildContext context) {
-    LoginFirstTimeCheck loginFirsTimeCheck = Get.put(LoginFirstTimeCheck());
+    LoginFirstTimeCheck loginFirstTimeCheck = Get.put(LoginFirstTimeCheck());
     return Scaffold(
       backgroundColor: AppColor.white,
       body: Stack(
@@ -124,6 +127,7 @@ class LoginPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 30),
+
                       SizedBox(
                         width: 180,
                         height: 40,
@@ -140,7 +144,7 @@ class LoginPage extends StatelessWidget {
                                 password: password,
                               );
 
-                              loginFirsTimeCheck.setOne();
+                              loginFirstTimeCheck.setOne();
 
                               FireBaseHelper.fireBaseHelper.getCredential(
                                 id: int.parse(id),
