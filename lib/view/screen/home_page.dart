@@ -1,5 +1,6 @@
+import 'dart:developer';
 import 'package:fire_base/export_app.dart';
-import 'package:fire_base/view/screen/chat_page.dart';
+
 
 class HomePage extends StatefulWidget {
    const HomePage({super.key});
@@ -9,7 +10,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  
+
    int argId = Get.arguments;
    late int id;
 
@@ -87,9 +88,23 @@ class _HomePageState extends State<HomePage> {
                             }
                           ),
                           subtitle: Text(
-                              ""
+                              "${allUser?['contact'][index]}",
+                            style: TextStyle(
+                              color: AppColor.black,
+                              fontSize: 14,
+                            ),
                           ),
-                          trailing: IconButton(onPressed: onPressed, icon: icon),
+                          trailing: IconButton(
+                              onPressed: () {
+                                Get.toNamed(
+                                  "/ChatPage",
+                                  arguments: data,
+                                );
+                              },
+                              icon: const Icon(
+                                  Icons.navigate_next_rounded,
+                              )
+                          ),
                         ),
                       );
                     }
@@ -97,13 +112,25 @@ class _HomePageState extends State<HomePage> {
                   },
               );
             } else if (snapshot.hasError) {
-
+              log("ERROR : ${snapshot.error}");
+              return Center(
+                child: Text("${snapshot.error}"
+              ),
+              );
             } else {
-              return Center(child: CircularProgressIndicator(),);
+              return const Center(child: CircularProgressIndicator(),);
             }
           }
-      )
       ),
+      ),
+      // floatingActionButton: FloatingActionButton(
+      //     onPressed: () {
+      //       Get.toNamed(
+      //         "",
+      //         arguments: argId,
+      //       );
+      //     }
+      // ),
     );
    }
 }

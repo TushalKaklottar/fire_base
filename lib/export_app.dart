@@ -17,7 +17,7 @@ export 'package:fire_base/view/screen/sign_in_page.dart';
 export 'package:fire_base/view/screen/splash_screen.dart';
 
 // controller
-export 'controller/login_controller.dart';
+export 'controller/first_time_login_controller.dart';
 export '../../controller/splash_controller.dart';
 
 //utils

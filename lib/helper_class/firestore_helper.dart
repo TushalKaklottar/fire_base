@@ -18,6 +18,7 @@ class FireBaseHelper {
   getUserNameUsingContact({required int contact}) async {
     Map<String,dynamic>? user = await getUser(id: contact);
 
+    log('{[${user['name']}]}');
     return user;
   }
 
@@ -30,7 +31,9 @@ class FireBaseHelper {
   }
 
   validateUser({required int id, required String password}) async {
-    DocumentSnapshot doc = await firebaseStore.collection(collection).doc(id.toString()).get();
+    DocumentSnapshot doc =
+
+    await firebaseStore.collection(collection).doc(id.toString()).get();
 
     if(doc["id"] == id) {
       log("Id Is fund");

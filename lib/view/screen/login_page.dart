@@ -4,10 +4,10 @@ import 'package:fire_base/export_app.dart';
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
 
-  String id = "";
-  String password = "";
+   String id = "";
+   String password = "";
 
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +52,7 @@ class LoginPage extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+
                       TextFormField(
                         textInputAction: TextInputAction.next,
                         initialValue: id,
@@ -85,7 +86,9 @@ class LoginPage extends StatelessWidget {
                             fontWeight: FontWeight.w600
                         ),
                       ),
+
                       const SizedBox(height: 18),
+
                       TextFormField(
                         textInputAction: TextInputAction.done,
                         keyboardType: TextInputType.visiblePassword,
