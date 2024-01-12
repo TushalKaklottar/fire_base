@@ -3,13 +3,32 @@ import 'package:fire_base/export_app.dart';
 
 
 class HomePage extends StatefulWidget {
-   const HomePage({super.key});
+    HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with WidgetsBindingObserver{
+
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addObserver(this);
+
+    void didChangeAppLifeCycleState(AppLifecycleState state) {
+      super.didChangeAppLifecycleState(state);
+
+      if (state == AppLifecycleState.resumed) {
+      } else if (state == AppLifecycleState.paused) {
+      } else {
+
+      }
+    }
+    FireBaseHelper.fireBaseHelper.getAllUser(id: argId);
+    super.initState();
+  }
+
 
    int argId = Get.arguments;
    late int id;
@@ -123,14 +142,17 @@ class _HomePageState extends State<HomePage> {
           }
       ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //     onPressed: () {
-      //       Get.toNamed(
-      //         "",
-      //         arguments: argId,
-      //       );
-      //     }
-      // ),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Get.toNamed(
+              "/Profile",
+              arguments: argId,
+            );
+          },
+          child: Icon(
+          Icons.perm_identity_sharp
+      ),
+      ),
     );
    }
 }

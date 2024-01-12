@@ -1,5 +1,6 @@
 import 'package:fire_base/export_app.dart';
 import 'package:fire_base/view/screen/chat_page.dart';
+import 'package:fire_base/view/screen/profile_page.dart';
 
 import 'controller/profile_controller.dart';
 
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
         ),
         GetPage(
             name: "/home",
-            page: () =>  const HomePage(),
+            page: () =>  HomePage(),
         ),
         GetPage(
             name: '/login',
@@ -47,6 +48,10 @@ class MyApp extends StatelessWidget {
             name: "/ChatPage",
             page: () => const ChatPage(),
         ),
+        GetPage(
+            name: "/Profile",
+            page: () => ProfilePage(),
+        )
       ],
     );
   }

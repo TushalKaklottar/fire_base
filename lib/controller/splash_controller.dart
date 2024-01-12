@@ -7,10 +7,11 @@ class SplashController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    Timer(
+    Timer.periodic(
         const Duration(seconds: 2),
-            () {
+            (timer) {
           Get.offNamed('/login');
+          timer.cancel();
         }
     );
   }
