@@ -1,4 +1,5 @@
 import 'package:fire_base/export_app.dart';
+import '../../controller/profile_controller.dart';
 
 class Sign_In extends StatelessWidget {
    Sign_In({super.key});
@@ -6,6 +7,8 @@ class Sign_In extends StatelessWidget {
   late int id;
   late String name;
   late String password;
+
+  ProfileController profileController = Get.find();
 
 
    GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -22,17 +25,17 @@ class Sign_In extends StatelessWidget {
               height: 130,
               child: Row(
                 children: [
-                IconButton(
-                    onPressed: () {
-                      Get.toNamed('/login');
-                    },
-                    icon:  Icon(
-                        Icons.arrow_back_ios,
-                        color: AppColor.white,
-                      size: 22,
-                    ),
-                  ),
-                  const SizedBox(width: 80),
+                // IconButton(
+                //     onPressed: () {
+                //       Get.toNamed('/login');
+                //     },
+                //     icon:  Icon(
+                //         Icons.arrow_back_ios,
+                //         color: AppColor.white,
+                //       size: 22,
+                //     ),
+                //   ),
+                  const SizedBox(width: 150),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -132,37 +135,48 @@ class Sign_In extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 25),
-                      TextFormField(
-                        textInputAction: TextInputAction.next,
-                        keyboardType: TextInputType.emailAddress,
-                        validator: (value) {
-                          if(value!.isEmpty) {
-                            return "Enter the Password";
-                          } else {
-                            return null;
-                          }
-                        },
-                        onSaved: (value) {
-                          password = value!;
-                        },
-                        decoration: InputDecoration(
-                          enabled: true,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          fillColor: AppColor.grey200,
-                          filled: true,
-                          hintText: "Password",
-                          helperStyle: GoogleFonts.aleo(
-                              color: AppColor.white60,
-                              fontSize: 12
-                          ),
-                        ),
-                        style: GoogleFonts.poppins(
-                            fontSize: 12,
-                            color: AppColor.black,
-                            fontWeight: FontWeight.w600
-                        ),
+                      Obx(
+                        () {
+                          return TextFormField(
+                            textInputAction: TextInputAction.next,
+                            keyboardType: TextInputType.emailAddress,
+                            obscureText: profileController.showPassword.value,
+                            validator: (value) {
+                              if(value!.isEmpty) {
+                                return "Enter the Password";
+                              } else {
+                                return null;
+                              }
+                            },
+                            onSaved: (value) {
+                              password = value!;
+                            },
+                            decoration: InputDecoration(
+                              enabled: true,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              suffixIcon: IconButton(
+                                  onPressed: () {
+                                    profileController.changeShow();
+                                  },
+                                  icon: Icon(Icons.remove_red_eye_outlined),
+                              ),
+                              fillColor: AppColor.grey200,
+                              filled: true,
+                              hintText: "Password",
+                              helperStyle: GoogleFonts.aleo(
+                                  color: AppColor.white60,
+                                  fontSize: 12
+                              ),
+                            ),
+                            style: GoogleFonts.poppins(
+                                fontSize: 12,
+                                color: AppColor.black,
+                                fontWeight: FontWeight.w600
+                            ),
+                          );
+                        }
                       ),
                       const SizedBox(height: 30),
                       SizedBox(

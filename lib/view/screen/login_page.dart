@@ -92,39 +92,52 @@ class LoginPage extends StatelessWidget {
 
                       const SizedBox(height: 18),
 
-                      TextFormField(
-                        textInputAction: TextInputAction.done,
-                        keyboardType: TextInputType.visiblePassword,
-                        initialValue: password,
+                      Obx(
+                         () {
+                          return TextFormField(
+                            textInputAction: TextInputAction.done,
+                            keyboardType: TextInputType.visiblePassword,
+                            initialValue: password,
+                            obscureText: profileController.showPassword.value,
 
-                        validator: (value) {
-                          if(value!.isEmpty) {
-                            return "enter the value";
-                          } else {
-                            return null;
-                          }
-                        },
-                        decoration: InputDecoration(
-                          enabled: true,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          fillColor: AppColor.grey200,
-                          filled: true,
-                          hintText: "Password",
-                          helperStyle: GoogleFonts.aleo(
-                              color: AppColor.white60,
-                              fontSize: 12
-                          ),
-                        ),
-                        onSaved: (newValue) {
-                          password = newValue!;
-                        },
-                        style: GoogleFonts.poppins(
-                            fontSize: 12,
-                            color: AppColor.black,
-                            fontWeight: FontWeight.w600
-                        ),
+                            validator: (value) {
+                              if(value!.isEmpty) {
+                                return "enter the value";
+                              } else {
+                                return null;
+                              }
+                            },
+                            decoration: InputDecoration(
+                              enabled: true,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              suffixIcon: IconButton(
+                                  onPressed: () {
+                                    profileController.changeShow();
+                                  },
+                                  icon: const Icon(Icons.remove_red_eye_outlined)
+                              ),
+                              label: const Text("Password"),
+                              fillColor: AppColor.grey200,
+                              filled: true,
+                              hintText: "Password",
+                              helperStyle: GoogleFonts.aleo(
+                                  color: AppColor.white60,
+                                  fontSize: 12
+                              ),
+                            ),
+                            
+                            onSaved: (newValue) {
+                              password = newValue!;
+                            },
+                            style: GoogleFonts.poppins(
+                                fontSize: 12,
+                                color: AppColor.black,
+                                fontWeight: FontWeight.w600
+                            ),
+                          );
+                        }
                       ),
                       const SizedBox(height: 30),
 

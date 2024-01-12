@@ -1,6 +1,8 @@
 import 'package:fire_base/export_app.dart';
 import 'package:fire_base/view/screen/chat_page.dart';
 
+import 'controller/profile_controller.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -11,12 +13,14 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-   MyApp({super.key});
+   const MyApp({super.key});
 
-  LoginFirstTimeCheck loginFirstTimeCheck = Get.put(LoginFirstTimeCheck());
+
 
   @override
   Widget build(BuildContext context) {
+    LoginFirstTimeCheck loginFirstTimeCheck = Get.put(LoginFirstTimeCheck());
+    ProfileController profileController = Get.put(ProfileController());
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
