@@ -75,6 +75,7 @@ class LoginPage extends StatelessWidget {
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
+                          label: const Text("ID"),
                           fillColor: AppColor.grey200,
                           filled: true,
                           hintText: "ID",
@@ -89,9 +90,7 @@ class LoginPage extends StatelessWidget {
                             fontWeight: FontWeight.w600
                         ),
                       ),
-
                       const SizedBox(height: 18),
-
                       Obx(
                          () {
                           return TextFormField(

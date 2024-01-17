@@ -1,3 +1,4 @@
+import 'package:fire_base/controller/settings_controller.dart';
 import 'package:fire_base/export_app.dart';
 import 'package:fire_base/view/screen/chat_page.dart';
 import 'package:fire_base/view/screen/profile_page.dart';
@@ -10,7 +11,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp( MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -22,6 +23,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     LoginFirstTimeCheck loginFirstTimeCheck = Get.put(LoginFirstTimeCheck());
     ProfileController profileController = Get.put(ProfileController());
+    final SettingController settingController = Get.put(SettingController());
+
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

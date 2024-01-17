@@ -1,9 +1,10 @@
 import 'dart:developer';
+import 'package:fire_base/controller/settings_controller.dart';
 import 'package:fire_base/export_app.dart';
 
 
 class HomePage extends StatefulWidget {
-    HomePage({super.key});
+    const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -20,7 +21,9 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver{
       super.didChangeAppLifecycleState(state);
 
       if (state == AppLifecycleState.resumed) {
+
       } else if (state == AppLifecycleState.paused) {
+
       } else {
 
       }
@@ -29,9 +32,15 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver{
     super.initState();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
 
    int argId = Get.arguments;
    late int id;
+   final SettingController controller = Get.find();
 
    @override
   Widget build(BuildContext context) {
@@ -44,13 +53,59 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver{
           textStyle: TextStyle(
             color: AppColor.black,
             fontSize: 26,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w600,
           )
         ),
         ),
+        actions: [
+          PopupMenuButton(
+            onSelected: (value) {
+              if(value == 'exit') {
+                Get.offNamed("/login");
+              }
+              if(value == 'Change Themes') {
+                controller.changeTheme();
+              }
+              if(value == "sign out") {
+                Get.offNamed("/login");
+              }
+              if(value == "Add Friend") {
+                // Get.toNamed("Add")
+              }
+              if(value == "Create New") {
+                Get.offNamed("/sign");
+              }
+            },
+              itemBuilder: (BuildContext context) {
+                return const [
+                    PopupMenuItem(
+                    value: "sign out",
+                      child: Text("Sign Out"),
+                  ),
+                  PopupMenuItem(
+                    value: "Change Themes",
+                      child: Text("Theme"),
+                  ),
+                  PopupMenuItem(
+                    value: 'Add Friend',
+                      child: Text("FriendShip"),
+                  ),
+                  PopupMenuItem(
+                    value: "Create New",
+                      child: Text("Create Account"),
+                  ),
+                  PopupMenuItem(
+                    value: "exit",
+                      child: Text("Exit"),
+                  ),
+                ];
+              }
+          ),
+        ],
+        backgroundColor: Colors.grey.shade100,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(16),
       child: FutureBuilder(
         future: FireBaseHelper.fireBaseHelper.getAllUser(id: argId),
           builder: (context,snapshot) {
@@ -64,7 +119,6 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver{
                       'sender': allUser?['contacts'][index],
                       'received': allUser,
                     };
-
                     if(snapshot.data?['contacts'].length > 0) {
                       return Container(
                         margin: const EdgeInsets.all(8),
@@ -133,11 +187,13 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver{
             } else if (snapshot.hasError) {
               log("ERROR : ${snapshot.error}");
               return Center(
-                child: Text("${snapshot.error}"
-              ),
+                 child: Text("${snapshot.error}"
+                 ),
               );
             } else {
-              return const Center(child: CircularProgressIndicator(),);
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
             }
           }
       ),
@@ -149,7 +205,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver{
               arguments: argId,
             );
           },
-          child: Icon(
+          child: const Icon(
           Icons.perm_identity_sharp
       ),
       ),
