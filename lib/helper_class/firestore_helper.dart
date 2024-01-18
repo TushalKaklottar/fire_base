@@ -62,7 +62,19 @@ class FireBaseHelper {
       "name": fireStoreModal.name,
       "id": fireStoreModal.id,
       "password": fireStoreModal.password,
-
+      "contacts": [],
+      "received" : {
+        "001" : {
+          "msg": ["Hi"],
+          "time": ["18/01/24-02:10:10"],
+        }
+      },
+      "sent": {
+        "001": {
+          "msg": ["Hello"],
+          "time": ["18/01/24-02:10:11"],
+        }
+      }
     };
     firebaseStore.collection(collection).doc("${fireStoreModal.id}").set(data);
   }

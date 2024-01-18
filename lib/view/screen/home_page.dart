@@ -16,7 +16,6 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver{
   @override
   void initState() {
     WidgetsBinding.instance.addObserver(this);
-
     void didChangeAppLifeCycleState(AppLifecycleState state) {
       super.didChangeAppLifecycleState(state);
 
@@ -76,7 +75,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver{
                 Get.offNamed("/sign");
               }
             },
-              itemBuilder: (BuildContext context) {
+              itemBuilder: (BuildContext bc) {
                 return const [
                     PopupMenuItem(
                     value: "sign out",
@@ -109,17 +108,16 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver{
       child: FutureBuilder(
         future: FireBaseHelper.fireBaseHelper.getAllUser(id: argId),
           builder: (context,snapshot) {
-            if(snapshot.hasData) {
+            if(snapshot.hasData  && snapshot.data?['contacts'] != null) {
               return ListView.builder(
                 itemCount: snapshot.data?['contacts']?.length,
                   itemBuilder: (context,index) {
-
                     Map<String,dynamic>? allUser = snapshot.data;
                     Map data = {
                       'sender': allUser?['contacts'][index],
                       'received': allUser,
                     };
-                    if(snapshot.data?['contacts'].length > 0) {
+                    if(snapshot.data?['contacts'] != null && snapshot.data?['contacts'].length > index) {
                       return Container(
                         margin: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
@@ -161,7 +159,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver{
                             }
                           ),
                           subtitle: Text(
-                              "${allUser?['contact'][index]}",
+                              "${allUser?['contacts'][index]}",
                             style: TextStyle(
                               color: AppColor.black,
                               fontSize: 14,
