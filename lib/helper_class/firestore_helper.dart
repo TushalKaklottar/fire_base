@@ -30,9 +30,17 @@ class FireBaseHelper {
     return allData;
   }
 
+  getAllUserStream({required int id}) {
+    Stream<DocumentSnapshot<Map<String,dynamic>>> data =
+        firebaseStore.collection(collection).doc("$id").snapshots();
+
+    Stream<dynamic> allData = data.map((event) => event.data());
+
+    return allData;
+  }
+
   validateUser({required int id, required String password}) async {
     DocumentSnapshot doc =
-
     await firebaseStore.collection(collection).doc(id.toString()).get();
 
     if(doc["id"] == id) {
@@ -55,6 +63,14 @@ class FireBaseHelper {
     return data["password"];
   }
 
+
+  Stream allUserId() {
+    Stream<QuerySnapshot<Map<String,dynamic>>> data =
+        firebaseStore.collection(collection).snapshots();
+
+    Stream<dynamic>  allData = data.map((event) => event.docs);
+    return allData;
+  }
 
   // addUser
   addUser({required FireStoreModal fireStoreModal}) {
@@ -87,5 +103,4 @@ class FireBaseHelper {
     return allData;
   }
 
-  // addContact({required})
 }

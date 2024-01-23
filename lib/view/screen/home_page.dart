@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver{
                 Get.offNamed("/login");
               }
               if(value == "Add Friend") {
-                // Get.toNamed("Add")
+                Get.toNamed("AddContact");
               }
               if(value == "Create New") {
                 Get.offNamed("/sign");
